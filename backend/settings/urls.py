@@ -9,18 +9,24 @@ from rest_framework_simplejwt.views import (
     TokenVerifyView,
 )
 
+from rest_framework.routers import SimpleRouter
+
 from auths.views import (
     RegisterUserView,
     ActivateUserView,
 )
+from main.views import PublicNFTViewSet
 
+router = SimpleRouter()
+router.register(r'public_nft', PublicNFTViewSet, basename='public_nft')
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'), # noqa
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'), # noqa
-    path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
+    path('api/token/', TokenObtainPairView.as_view()),
+    path('api/token/refresh/', TokenRefreshView.as_view()),
+    path('api/token/verify/', TokenVerifyView.as_view()),
     path('api/user/register/', RegisterUserView.as_view()),
     path('api/user/activate/', ActivateUserView.as_view()),
 ]

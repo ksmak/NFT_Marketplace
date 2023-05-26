@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import PublicNFT, Transaction
+
+
+admin.site.register(PublicNFT)
+admin.site.register(Transaction)

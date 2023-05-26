@@ -4,6 +4,7 @@ from rest_framework.views import APIView
 from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import AllowAny
 
 from .serializers import (
     CreateUserSerializer
@@ -14,6 +15,8 @@ class RegisterUserView(APIView):
     """
         View for register new user
     """
+    permission_classes = [AllowAny]
+
     def post(self, request: Request) -> Response:
         serializer = CreateUserSerializer(
             data=request.data
@@ -48,6 +51,8 @@ class ActivateUserView(APIView):
     """
         View for activate new user by email
     """
+    permission_classes = [AllowAny]
+
     def post(self, request: Request) -> Response:
         activate_code = request.query_params.get('code')
         if not activate_code:

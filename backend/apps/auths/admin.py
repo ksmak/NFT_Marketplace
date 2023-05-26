@@ -48,7 +48,8 @@ class CustomUserAdmin(UserAdmin):
         })
     )
     readonly_fields = (
-        'activate_code', 'date_of_creation', 'date_of_change', 'is_superuser'
+        'activate_code', 'date_of_creation', 'date_of_change',
+        'is_superuser', 'is_staff'
     )
     search_fields = ('email', )
     ordering = ('email', )
