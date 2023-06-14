@@ -29,8 +29,8 @@ class RegisterUserView(APIView):
             )
 
         if get_user_model().objects.filter(
-                                            email=request.data.get('email')
-                                          ).exists():
+            email=request.data.get('email')
+        ).exists():
             return Response(
                 {
                     'error': 'User already exists.'
@@ -53,7 +53,7 @@ class ActivateUserView(APIView):
     """
     permission_classes = [AllowAny]
 
-    def post(self, request: Request) -> Response:
+    def get(self, request: Request) -> Response:
         activate_code = request.query_params.get('code')
         if not activate_code:
             return Response(
