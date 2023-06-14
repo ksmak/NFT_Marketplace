@@ -22,7 +22,11 @@ class CustomUserAdmin(UserAdmin):
         }),
         ('Personal info', {
             'classes': ('wide', ),
-            'fields': ('surname', 'name', 'patronymic', 'token')
+            'fields': ('surname', 'name', 'patronymic')
+        }),
+        ('Wallet info', {
+            'classes': ('wide', ),
+            'fields': ('account_address', 'private_key')
         }),
         ('Permissions', {
             'classes': ('wide', ),
@@ -36,7 +40,11 @@ class CustomUserAdmin(UserAdmin):
         }),
         ('Personal info', {
             'classes': ('wide', ),
-            'fields': ('surname', 'name', 'patronymic', 'token')
+            'fields': ('surname', 'name', 'patronymic')
+        }),
+        ('Wallet info', {
+            'classes': ('wide', ),
+            'fields': ('account_address', 'private_key')
         }),
         ('Permissions', {
             'classes': ('wide', ),

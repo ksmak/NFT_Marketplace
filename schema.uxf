@@ -1,6 +1,35 @@
-<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>10</x><y>10</y><w>210</w><h>70</h></coordinates><panel_attributes>
-_Blockchain_
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><help_text>Space for diagram notes</help_text><element><id>UMLClass</id><coordinates><x>20</x><y>10</y><w>210</w><h>170</h></coordinates><panel_attributes>
+_User_
 
 --
-id: Long="36548"
-bg=blue</panel_attributes><additional_attributes></additional_attributes></element></diagram>
+email: String
+token: String
+surname: String
+name: String
+patronymic: String
+date_of_creation: DateTime
+date_of_change: DateTime
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>390</x><y>10</y><w>210</w><h>140</h></coordinates><panel_attributes>
+_Public NFT_
+
+--
+token: String
+owner: String
+image: ImageField
+date_of_creation: DateTime
+date_of_change: DateTime
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>780</x><y>10</y><w>210</w><h>140</h></coordinates><panel_attributes>
+_Transaction_
+
+--
+from_user: User
+to_user: User
+token: String
+date_of_creation: DateTime
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>220</x><y>70</y><w>190</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>170;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>590</x><y>80</y><w>210</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>190;10;10;10</additional_attributes></element><element><id>UMLActor</id><coordinates><x>140</x><y>310</y><w>60</w><h>110</h></coordinates><panel_attributes>User</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>360</x><y>270</y><w>120</w><h>40</h></coordinates><panel_attributes>NFT
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>350</x><y>340</y><w>120</w><h>40</h></coordinates><panel_attributes>NFT
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>390</x><y>420</y><w>120</w><h>40</h></coordinates><panel_attributes>NFT</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>190</x><y>280</y><w>190</w><h>70</h></coordinates><panel_attributes></panel_attributes><additional_attributes>170;10;10;50</additional_attributes></element><element><id>Relation</id><coordinates><x>190</x><y>320</y><w>180</w><h>60</h></coordinates><panel_attributes></panel_attributes><additional_attributes>160;40;10;10</additional_attributes></element><element><id>UMLActor</id><coordinates><x>490</x><y>580</y><w>60</w><h>110</h></coordinates><panel_attributes>User</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLActor</id><coordinates><x>780</x><y>300</y><w>60</w><h>110</h></coordinates><panel_attributes>User</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>520</x><y>310</y><w>120</w><h>40</h></coordinates><panel_attributes>NFT
+fg=red
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLUseCase</id><coordinates><x>540</x><y>380</y><w>120</w><h>40</h></coordinates><panel_attributes>NFT
+fg=red
+bg=yellow</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>450</x><y>450</y><w>70</w><h>160</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>50;140;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>190</x><y>330</y><w>230</w><h>120</h></coordinates><panel_attributes>lt=&lt;&lt;.</panel_attributes><additional_attributes>210;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>630</x><y>300</y><w>170</w><h>50</h></coordinates><panel_attributes></panel_attributes><additional_attributes>150;20;10;30</additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>320</y><w>170</w><h>90</h></coordinates><panel_attributes></panel_attributes><additional_attributes>150;10;10;70</additional_attributes></element></diagram>

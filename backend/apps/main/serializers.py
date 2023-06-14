@@ -1,21 +1,22 @@
 from rest_framework import serializers
 
-from .models import PublicNFT, Transaction
+
+class ArtSerializer(serializers.Serializer):
+    """
+        Art (NFT object) serializer.
+    """
+    status = serializers.IntegerField(required=False)
+    uri = serializers.CharField()
+    owner = serializers.CharField()
+    price = serializers.IntegerField()
+    date_of_creation = serializers.CharField(required=False)
+    title = serializers.CharField()
 
 
-class PublicNFTSerializer(serializers.ModelSerializer):
+class BuyArtSerializer(serializers.Serializer):
     """
-        Public NFT serializer.
+        Serializer for buying Art(NFT object)
     """
-    class Meta:
-        model = PublicNFT
-        fields = '__all__'
-
-
-class TransactionSerializer(serializers.ModelSerializer):
-    """
-        Transaction serializer.
-    """
-    class Meta:
-        model = Transaction
-        fields = '__all__'
+    buyer = serializers.CharField()
+    tokenId = serializers.IntegerField()
+    markup = serializers.IntegerField()

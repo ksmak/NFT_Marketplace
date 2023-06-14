@@ -6,7 +6,6 @@ from django.conf.urls.static import static
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
-    TokenVerifyView,
 )
 
 from rest_framework.routers import SimpleRouter
@@ -26,7 +25,6 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('api/token/', TokenObtainPairView.as_view()),
     path('api/token/refresh/', TokenRefreshView.as_view()),
-    path('api/token/verify/', TokenVerifyView.as_view()),
     path('api/user/register/', RegisterUserView.as_view()),
     path('api/user/activate/', ActivateUserView.as_view()),
 ]

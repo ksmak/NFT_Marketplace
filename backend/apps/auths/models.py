@@ -12,6 +12,7 @@ class CustomUserManager(BaseUserManager):
     """
         Custom user manager
     """
+
     def create_user(self, email, password):
         if not email:
             raise ValueError("User must have an email address")
@@ -79,9 +80,13 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name='is superuser',
         default=False,
     )
-    token = models.CharField(
-        verbose_name='token',
-        max_length=258
+    account_address = models.CharField(
+        verbose_name='account address',
+        max_length=42
+    )
+    private_key = models.CharField(
+        verbose_name='private key',
+        max_length=66
     )
     activate_code = models.CharField(
         verbose_name='activation code',
