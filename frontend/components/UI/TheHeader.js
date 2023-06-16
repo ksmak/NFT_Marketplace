@@ -1,8 +1,14 @@
 'use client'
 import Link from "next/link";
-import TheUsername from "./TheUsername";
+import { useState, useEffect } from "react";
 
-const TheHeader = () => {
+export default function TheHeader() {
+    const [username, setUsername] = useState(null);
+
+    useEffect(() => {
+        setUsername(sessionStorage.getItem('username'));
+    }, []);
+
     return (
         <header className="h-20 bg-black text-white flex flex-row items-center">
             <nav className="grow flex flex-row items-center justify-center">
@@ -11,10 +17,6 @@ const TheHeader = () => {
                 <Link className="p-5" href="/signup">Sign Up</Link>
                 <Link className="p-5" href="/about">About</Link>
             </nav>
-            <TheUsername />
         </header>
     );
 }
-
-
-export default TheHeader;

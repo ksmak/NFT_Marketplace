@@ -15,7 +15,6 @@ class PublicNFT(models.Model):
     """
     token_id = models.IntegerField(
         verbose_name='token id',
-        max_length=258,
         unique=True,
         primary_key=True
     )

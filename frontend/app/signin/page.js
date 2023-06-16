@@ -1,45 +1,42 @@
 'use client'
-import useSessionStorage from "@/components/useSessionStorage";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SignIn = () => {
+export default function SignIn() {
     const router = useRouter();
+
     const [inputs, setInputs] = useState({});
     const [error, setError] = useState();
-    const [username, setUsername] = useSessionStorage('username', '');
-    const [accessToken, setAccessToken] = useSessionStorage('accessToken', '');
-    const [refreshToken, setRefreshToken] = useSessionStorage('refreshToken', '');
 
-    const handleChange = (event: any) => {
+    const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({ ...values, [name]: value }))
     };
 
-    const handleSubmit = async (event: any) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
 
-        const response = await fetch("http://127.0.0.1:8000/api/token/", {
+        const response = await fetch(`${process.env.FRONTEND_HOST}/api/user/login/`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             body: JSON.stringify(inputs)
         });
 
-        const result = await response.json();
-
         if (!response.ok) {
-            setError('Error! Email or password incorrect.');
+            setError('Error! Invalid email or password.');
             return;
         }
 
-        console.log(result);
+        const result = await response.json();
 
-        setUsername(inputs.email);
-        setAccessToken(result.access);
-        setRefreshToken(result.refresh);
+        sessionStorage.setItem('id', result.id);
+        sessionStorage.setItem('username', result.username);
+        sessionStorage.setItem('accessToken', result.access);
+        sessionStorage.setItem('refreshToken', result.refresh);
 
         router.push('/');
     };
@@ -68,6 +65,3 @@ const SignIn = () => {
         </div >
     );
 }
-
-
-export default SignIn;

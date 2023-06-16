@@ -80,17 +80,17 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
         verbose_name='is superuser',
         default=False,
     )
-    account_address = models.CharField(
-        verbose_name='account address',
-        max_length=42
-    )
-    private_key = models.CharField(
-        verbose_name='private key',
-        max_length=66
+    wallet = models.CharField(
+        verbose_name='wallet',
+        max_length=42,
+        blank=True,
+        null=True
     )
     activate_code = models.CharField(
-        verbose_name='activation code',
-        max_length=ACTIVATE_CODE_SIZE
+        verbose_name='activate code',
+        max_length=ACTIVATE_CODE_SIZE,
+        blank=True,
+        null=True
     )
     date_of_creation = models.DateTimeField(
         verbose_name='date of creation',

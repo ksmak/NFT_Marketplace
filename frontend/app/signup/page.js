@@ -2,64 +2,51 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const SignUp = () => {
+export default function SignUp() {
     const router = useRouter();
-    const [inputs, setInputs] = useState({});
-    const [error, setError] = useState();
 
-    const handleChange = (event: any) => {
+    const [inputs, setInputs] = useState({});
+    const [error, setError] = useState(null);
+
+    const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
         setInputs(values => ({ ...values, [name]: value }))
     };
 
-    const isNotVerifyPassword = (pas1: string, pas2: string) => {
-        if (pas1 == null) {
-            setError('Error! The password cannot is empty');
+    const isNotVerify = (inputs) => {
+        if (inputs.email === null || inputs.email === '' || inputs.email === undefined) {
+            setError("Error! Email cannot be empty.");
+            return true
+        }
+        if (inputs.password === null || inputs.password === '' || inputs.password === undefined) {
+            setError("Error! Password cannot be empty.");
             return true;
         }
-        if (pas1 !== pas2) {
-            setError('Error! Passwords not same!');
+        if (inputs.password !== inputs.repeat_password) {
+            setError("Error! Passwords don't match");
             return true;
         }
         return false;
     }
 
-    const handleSubmit = async (event: any) => {
-        event.preventDefault();
-        if (isNotVerifyPassword(inputs.password, inputs.repeat_password)) {
-            return
-        }
-        const response = await fetch("http://127.0.0.1:8000/api/user/register/", {
+    const registerUser = async (inputs) => {
+        const response = await fetch(`${process.env.FRONTEND_HOST}/api/user/register`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             body: JSON.stringify(inputs)
         });
 
         const result = await response.json();
 
-        if (!response.ok) {
-            setError(result.error);
-            return;
-        }
+        return [response, result];
+    }
 
-        interface Result {
-            email: string;
-            subject: string;
-            message: string;
-        }
-
-        const activate_url = `http://127.0.0.1:8000/api/user/activate/?code=${result.activate_code}`
-
-        const data: Result = {
-            email: inputs.email,
-            subject: 'Please Verify Your Account for Marketplace NFT',
-            message: `Please follow the following link to activate your account: <a href='${activate_url}'>${activate_url}</a>`
-        }
-
-        const resp = await fetch("/api/contacts", {
+    const sendMail = async (data) => {
+        const response = await fetch(`${process.env.FRONTEND_HOST}/api/contacts`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -68,7 +55,34 @@ const SignUp = () => {
             body: JSON.stringify(data),
         });
 
-        if (!resp.ok) {
+        return response.ok;
+    }
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        if (isNotVerify(inputs)) {
+            return;
+        }
+
+        const [reg_response, reg_result] = await registerUser(inputs);
+
+        if (!reg_response.ok) {
+            setError("Error! User is not registered.")
+            return;
+        }
+
+        const activate_url = `${process.env.FRONTEND_HOST}/activate/${reg_result.result}`
+
+        const data = {
+            email: inputs.email,
+            subject: `Please Verify Your Account for ${process.env.SITE_NAME}`,
+            message: `Please follow the following link to activate your account: <a href='${activate_url}'>${activate_url}</a>`
+        }
+
+        const isSendingMail = await sendMail(data);
+
+        if (!isSendingMail) {
             setError("Error sending email!");
             return;
         }
@@ -104,6 +118,3 @@ const SignUp = () => {
         </div >
     );
 }
-
-
-export default SignUp
